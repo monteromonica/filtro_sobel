@@ -8,36 +8,62 @@ Implementación de un filtro Sobel para detección de bordes en imágenes, desar
 filtro-sobel/
 ├── src/                    # Código fuente principal
 │   ├── sobel_filter.cpp    # Implementación básica del filtro Sobel
+│   ├── sobel_filter_improved.cpp # Versión mejorada con C++ moderno
 │   ├── sobel_filter_omp.cpp # Versión optimizada con OpenMP
-│   └── sobel_filter_pthread.cpp # Versión con pThreads
+│   ├── sobel_filter_pthread.cpp # Versión con pThreads
+│   ├── sobel_filter_improved_lib.cpp # Librería para Strategy Pattern
+│   ├── sobel_strategies.cpp # Implementaciones Strategy Pattern
+│   ├── filter_factory.cpp  # Factory Pattern
+│   └── test_strategy_factory.cpp # Prueba Strategy/Factory patterns
+├── include/                # Headers
+│   ├── sobel_filter.h      # Header del filtro mejorado
+│   ├── edge_detection_strategy.h # Interface Strategy Pattern
+│   └── filter_factory.h    # Header Factory Pattern
 ├── tests/                  # Programas de prueba
 │   ├── test_sobel.cpp      # Prueba con interfaz gráfica
 │   ├── test_sobel_no_gui.cpp # Prueba sin GUI (Docker)
-│   └── test_sobel_omp.cpp  # Prueba específica para OpenMP
+│   ├── test_sobel_omp.cpp  # Prueba específica para OpenMP
+│   └── test_sobel_omp_fixed.cpp # Prueba OpenMP corregida
 ├── scripts/                # Scripts de automatización
-│   ├── ensure-test-image.ps1 # Verifica/genera imagen de prueba
-│   ├── test-omp.ps1        # Prueba específica para OpenMP
-│   ├── test-pthread.ps1    # Prueba específica para pThreads
-│   ├── clean-images.ps1    # Limpieza de imágenes
-│   ├── run-complete-test.ps1 # Script maestro completo
-│   └── compare-performance.ps1 # Compara rendimiento
+│   ├── test-basic.sh/.ps1  # Prueba del requisito mínimo
+│   ├── test-omp.sh/.ps1    # Prueba versión OpenMP
+│   ├── test-pthread.sh/.ps1 # Prueba versión pThreads
+│   ├── test-improved.sh    # Prueba versión mejorada
+│   ├── test-strategy-factory.sh # Prueba Strategy/Factory
+│   ├── run-complete-test.sh/.ps1 # Script maestro completo
+│   ├── compare-performance.sh/.ps1 # Compara rendimiento
+│   ├── clean-images.sh/.ps1 # Limpieza de imágenes
+│   └── ensure-test-image.sh/.ps1 # Verifica/genera imagen de prueba
 ├── docker/                 # Configuración Docker
 │   ├── Dockerfile.fast     # Imagen Docker rápida
 │   ├── docker-compose.fast.yml
 │   └── .dockerignore
+├── android/                # Código para Android NDK/JNI
+│   └── sobel_jni.cpp       # Implementación JNI
 ├── docs/                   # Documentación
 │   ├── README.md           # Documentación detallada
-│   └── dependencies.txt    # Dependencias del proyecto
-├── images/                 # Imágenes de entrada/salida
-│   ├── test_image.jpg      # Imagen de prueba única (10KB)
+│   ├── dependencies.txt    # Dependencias del proyecto
+│   └── ANDROID_NDK_TUTORIAL.md # Tutorial Android NDK/JNI
+├── images/                 # Imágenes de entrada/salida (incluidas en Git)
+│   ├── test_image.jpg      # Imagen de prueba (10KB)
+│   ├── lenna.jfif          # Imagen de ejemplo (Lenna)
+│   ├── lenna_sobel*.jpg    # Resultados con filtro básico
+│   ├── lenna_improved*.jpg # Resultados con filtro mejorado
+│   ├── lenna_threshold80*.jpg # Resultados con umbral ajustado
 │   ├── sobel_basic_*.jpg   # Resultados del filtro básico
 │   ├── sobel_improved_*.jpg # Resultados del filtro mejorado
 │   ├── test_sobel_omp_*.jpg # Resultados del filtro OpenMP
-│   └── sobel_pthread_*.jpg # Resultados del filtro pThreads
-├── build/                  # Directorio de compilación
+│   ├── sobel_pthread_*.jpg # Resultados del filtro pThreads
+│   └── strategy_factory_output/ # Resultados Strategy Pattern
+├── build.sh                # Script Bash simplificado
+├── build.ps1               # Script PowerShell simplificado
+├── Makefile                # Comandos avanzados
 ├── CMakeLists.txt          # Configuración CMake
-└── .gitignore             # Archivos a ignorar
+├── .gitignore             # Archivos a ignorar
+└── README.md              # Este archivo
 ```
+
+**Nota:** Los archivos generados durante la compilación (`build/`, `*.o`, `*.exe`) y las imágenes temporales están excluidos por `.gitignore`.
 
 ## 🚀 Inicio Rápido
 
@@ -155,6 +181,14 @@ make test-pthread
 ```
 
 ## 📸 Uso con Imágenes Propias
+
+### Imágenes de Ejemplo Incluidas:
+El repositorio incluye ejemplos de resultados para que puedas ver el funcionamiento sin ejecutar el código:
+- `test_image.jpg` - Imagen de prueba generada automáticamente
+- `lenna.jfif` - Imagen clásica de Lenna para testing
+- `lenna_sobel*.jpg` - Resultados del filtro básico
+- `lenna_improved*.jpg` - Resultados del filtro mejorado
+- `lenna_threshold80*.jpg` - Resultados con umbral ajustado
 
 ### Paso a Paso:
 
