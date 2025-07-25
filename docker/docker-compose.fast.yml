@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sobel-dev-fast:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.fast
+    container_name: sobel-filter-dev-fast
+    volumes:
+      # Montar el codigo fuente para desarrollo en tiempo real
+      - ..:/workspace
+      # Montar directorio para imagenes de entrada/salida
+      - ../images:/workspace/images
+    working_dir: /workspace
+    # Para desarrollo interactivo
+    stdin_open: true
+    tty: true
+    # Comando por defecto
+    command: /bin/bash 

@@ -1,0 +1,74 @@
+# Dependencias del proyecto - Filtro Sobel
+# Prueba Técnica Photonicsens
+
+## Dependencias principales
+
+### OpenCV
+- **Versión mínima**: 4.0.0
+- **Versión recomendada**: 4.8.0 o superior
+- **Propósito**: Lectura y escritura de imágenes
+- **Nota**: Solo se usa para I/O, el filtro Sobel se implementa manualmente
+
+### CMake
+- **Versión mínima**: 3.10
+- **Versión recomendada**: 3.20 o superior
+- **Propósito**: Sistema de build y configuración del proyecto
+
+### Compilador C++
+- **Estándar**: C++17 o superior
+- **Compiladores soportados**:
+  - GCC 7.0+ (Linux/macOS)
+  - Clang 5.0+ (Linux/macOS)
+  - MSVC 2017+ (Windows)
+
+## Instalación por plataforma
+
+### Windows
+```powershell
+# Con vcpkg (recomendado)
+vcpkg install opencv4:x64-windows
+
+# Con Chocolatey
+choco install opencv
+
+# Con conda
+conda install opencv
+```
+
+### Ubuntu/Debian
+```bash
+sudo apt update
+sudo apt install libopencv-dev cmake build-essential
+```
+
+### macOS
+```bash
+# Con Homebrew
+brew install opencv cmake
+
+# Con conda
+conda install opencv
+```
+
+## Verificación de instalación
+
+### Verificar OpenCV
+```bash
+# Verificar versión de OpenCV
+pkg-config --modversion opencv4
+
+# O en Windows con vcpkg
+vcpkg list opencv4
+```
+
+### Verificar CMake
+```bash
+cmake --version
+```
+
+## Notas importantes
+
+- El proyecto NO utiliza las funciones de filtrado de OpenCV
+- Solo se usa OpenCV para: imread(), imwrite(), cvtColor(), imshow()
+- El filtro Sobel se implementa completamente desde cero
+- Compatible con imágenes en formatos: JPG, PNG, BMP, TIFF 

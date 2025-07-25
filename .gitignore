@@ -1,0 +1,74 @@
+# Directorios de build
+build/
+bin/
+lib/
+Debug/
+Release/
+x64/
+
+# Archivos de CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Archivos de Visual Studio
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Archivos de imagen generados por pruebas
+test_image.jpg
+test_sobel_result.jpg
+test_sobel_threshold.jpg
+*_threshold.*
+
+# Archivos temporales
+*.tmp
+*.temp
+*~
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de log
+*.log
+
+# Documentación interna (no subir al repositorio)
+MEJORAS_IMPLEMENTADAS.md 

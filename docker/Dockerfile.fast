@@ -1,0 +1,56 @@
+# Dockerfile rapido para Filtro Sobel - Prueba Tecnica Photonicsens
+# Usa imagen base con OpenCV preinstalado
+
+FROM ubuntu:22.04
+
+# Evitar prompts interactivos
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar OpenCV y herramientas de desarrollo desde repositorios
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    wget \
+    curl \
+    pkg-config \
+    libopencv-dev \
+    python3-opencv \
+    gdb \
+    valgrind \
+    cppcheck \
+    clang-format \
+    && rm -rf /var/lib/apt/lists/*
+
+# Crear directorio de trabajo
+WORKDIR /workspace
+
+# Copiar archivos del proyecto
+COPY . .
+
+# Configurar variables de entorno
+ENV OPENCV_DIR=/usr
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+
+# Crear script de compilacion
+RUN echo '#!/bin/bash\n\
+echo "=== Compilando Filtro Sobel ==="\n\
+mkdir -p build\n\
+cd build\n\
+cmake ..\n\
+make -j$(nproc)\n\
+echo "=== Compilacion completada ==="\n\
+echo "Ejecutables creados:"\n\
+ls -la sobel_filter test_sobel\n\
+' > /workspace/compile.sh && chmod +x /workspace/compile.sh
+
+# Crear script de prueba
+RUN echo '#!/bin/bash\n\
+echo "=== Ejecutando pruebas ==="\n\
+cd build\n\
+./test_sobel\n\
+echo "=== Pruebas completadas ==="\n\
+' > /workspace/test.sh && chmod +x /workspace/test.sh
+
+# Comando por defecto
+CMD ["/bin/bash"] 
